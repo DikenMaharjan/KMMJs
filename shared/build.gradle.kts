@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -24,15 +25,24 @@ kotlin {
         }
     }
     js {
+
         browser {
+
         }
         binaries.executable()
     }
+    task("testClasses")
 }
 
-tasks.withType<KotlinJsCompile>().configureEach {
-    kotlinOptions {
-        useEsClasses = true
+
+
+tasks.register("preCleanBuild") {
+    group = "build"
+    description = "Runs `clean` before build tasks."
+
+    dependsOn("clean")
+
+    doLast {
+        println("Running build tasks after clean...")
     }
 }
-
