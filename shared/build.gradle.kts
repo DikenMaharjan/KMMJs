@@ -35,14 +35,3 @@ kotlin {
 }
 
 
-
-tasks.register("preCleanBuild") {
-    group = "build"
-    description = "Runs `clean` before build tasks."
-
-    dependsOn("clean")
-
-    doLast {
-        println("Running build tasks after clean...")
-    }
-}
